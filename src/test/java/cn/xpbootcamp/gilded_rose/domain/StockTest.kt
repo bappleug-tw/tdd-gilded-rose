@@ -22,13 +22,6 @@ internal class StockTest {
     }
 
     @Test
-    fun `should throw error when name is empty`() {
-        assertFailWithMsg(IllegalArgumentException::class, "invalid empty name") {
-            Stock(Good.AGED_BRIE, 1, 100, 20)
-        }
-    }
-
-    @Test
     fun `should throw error when amount is less than 1`() {
         val negativeAmount = -1
         assertFailWithMsg(IllegalArgumentException::class, "invalid amount $negativeAmount") {
