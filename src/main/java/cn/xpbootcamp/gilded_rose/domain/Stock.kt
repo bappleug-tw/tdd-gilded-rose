@@ -12,7 +12,7 @@ data class Stock(
 ) {
 
     val currentQuality: Int
-        get() = 0
+        get() = quality
 
     init {
         if (amount < 1) throw IllegalArgumentException("invalid amount $amount")
