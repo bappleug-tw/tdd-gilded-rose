@@ -34,7 +34,7 @@ internal class StockTest {
     }
 
     @Test
-    fun `should throw error when amount less than 1`() {
+    fun `should throw error when amount is less than 1`() {
         val negativeAmount = -1
         assertFailsWith(IllegalArgumentException::class, "invalid amount $negativeAmount") {
             Stock("name", negativeAmount, Date(), 100, 20)
@@ -43,6 +43,19 @@ internal class StockTest {
         val zeroAmount = 0
         assertFailsWith(IllegalArgumentException::class, "invalid amount $zeroAmount") {
             Stock("name", zeroAmount, Date(), 100, 20)
+        }
+    }
+
+    @Test
+    fun `should throw error when quantity is below 0 or above 50`() {
+        val negativeQuantity = -1
+        assertFailsWith(IllegalArgumentException::class, "invalid quantity $negativeQuantity") {
+            Stock("name", 10, Date(), negativeQuantity, 20)
+        }
+
+        val tooBigQuantity = 51
+        assertFailsWith(IllegalArgumentException::class, "invalid quantity $tooBigQuantity") {
+            Stock("name", 10, Date(), tooBigQuantity, 20)
         }
     }
 }
