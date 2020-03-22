@@ -13,8 +13,13 @@ internal class StorageTest {
     }
 
     @Test
-    fun `should store a number of goods`() {
+    fun `should be able to stock in`() {
         val stock = Stock()
         stockService.stockIn(stock)
+    }
+
+    @Test
+    fun `should be able to get list of stocks`() {
+        val stocks = stockService.listAll()
     }
 }
