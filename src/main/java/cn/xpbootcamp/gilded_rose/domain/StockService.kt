@@ -2,13 +2,14 @@ package cn.xpbootcamp.gilded_rose.domain
 
 class StockService {
 
-    fun stockIn(stock: Stock): Unit {
+    private val stocks: MutableList<Stock> = mutableListOf()
 
+    fun stockIn(stock: Stock): Unit {
+        stocks.add(stock)
     }
 
     fun listAll(): List<Stock> {
-        return listOf()
+        return stocks
     }
-
 
 }
