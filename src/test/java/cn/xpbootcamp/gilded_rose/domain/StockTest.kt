@@ -10,7 +10,7 @@ import kotlin.test.assertFailsWith
 internal class StockTest {
 
     @Test
-    fun `should have Name, Amount, StockInAt, Quantity, SellIn property`() {
+    fun `should have Name, Amount, StockInAt, Quantity, SellIn property as default constructor`() {
         val stockInDate = Date()
         val stock = Stock(
                 name = "name",
