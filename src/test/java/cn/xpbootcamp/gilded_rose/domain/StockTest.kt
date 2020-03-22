@@ -5,7 +5,7 @@ import cn.xpbootcamp.gilded_rose.utils.assertFailWithMsg
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 import java.lang.IllegalArgumentException
-import java.util.*
+import java.time.LocalDateTime
 
 internal class StockTest {
 
@@ -16,7 +16,7 @@ internal class StockTest {
                 amount = 1,
                 quality = 30,
                 sellIn = 20,
-                stockInAt = Date()
+                stockInAt = LocalDateTime.now()
         )
         assertThat(stock.good).isEqualTo(Good.AGED_BRIE)
         assertThat(stock.amount).isEqualTo(1)
