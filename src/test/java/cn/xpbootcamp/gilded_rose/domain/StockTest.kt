@@ -1,5 +1,6 @@
 package cn.xpbootcamp.gilded_rose.domain
 
+import cn.xpbootcamp.gilded_rose.mockStock
 import cn.xpbootcamp.gilded_rose.utils.assertFailWithMsg
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
@@ -25,12 +26,12 @@ internal class StockTest {
     fun `should throw error when amount is less than 1`() {
         val negativeAmount = -1
         assertFailWithMsg(IllegalArgumentException::class, "invalid amount $negativeAmount") {
-            Stock(Good.AGED_BRIE, negativeAmount, 100, 20)
+            mockStock.copy(amount = negativeAmount)
         }
 
         val zeroAmount = 0
         assertFailWithMsg(IllegalArgumentException::class, "invalid amount $zeroAmount") {
-            Stock(Good.AGED_BRIE, zeroAmount, 100, 20)
+            mockStock.copy(amount = zeroAmount)
         }
     }
 
@@ -51,7 +52,7 @@ internal class StockTest {
     fun `should throw error when sellIn is below 1`() {
         val expiredSellIn = 0
         assertFailWithMsg(IllegalArgumentException::class, "invalid sellIn $expiredSellIn") {
-            Stock(Good.AGED_BRIE, 10, 100, expiredSellIn)
+            mockStock.copy(sellIn = expiredSellIn)
         }
     }
 }
