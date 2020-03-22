@@ -1,7 +1,6 @@
 package cn.xpbootcamp.gilded_rose.domain
 
 import org.assertj.core.api.Assertions.assertThat
-import org.assertj.core.api.Assertions.assertThatIllegalArgumentException
 import org.junit.jupiter.api.Test
 import java.lang.IllegalArgumentException
 import java.util.*
@@ -16,13 +15,13 @@ internal class StockTest {
                 name = "name",
                 amount = 1,
                 stockInAt = stockInDate,
-                quantity = 100,
+                quality = 100,
                 sellIn = 20
         )
         assertThat(stock.name).isEqualTo("name")
         assertThat(stock.amount).isEqualTo(1)
         assertThat(stock.stockInAt).isEqualTo(stockInDate)
-        assertThat(stock.quantity).isEqualTo(100)
+        assertThat(stock.quality).isEqualTo(100)
         assertThat(stock.sellIn).isEqualTo(20)
     }
 
@@ -47,15 +46,15 @@ internal class StockTest {
     }
 
     @Test
-    fun `should throw error when quantity is below 0 or above 50`() {
-        val negativeQuantity = -1
-        assertFailsWith(IllegalArgumentException::class, "invalid quantity $negativeQuantity") {
-            Stock("name", 10, Date(), negativeQuantity, 20)
+    fun `should throw error when quality is below 0 or above 50`() {
+        val negativeQuality = -1
+        assertFailsWith(IllegalArgumentException::class, "invalid quality $negativeQuality") {
+            Stock("name", 10, Date(), negativeQuality, 20)
         }
 
-        val tooBigQuantity = 51
-        assertFailsWith(IllegalArgumentException::class, "invalid quantity $tooBigQuantity") {
-            Stock("name", 10, Date(), tooBigQuantity, 20)
+        val tooBigQuality = 51
+        assertFailsWith(IllegalArgumentException::class, "invalid quality $tooBigQuality") {
+            Stock("name", 10, Date(), tooBigQuality, 20)
         }
     }
 }
