@@ -3,6 +3,7 @@ package cn.xpbootcamp.gilded_rose.domain
 import cn.xpbootcamp.gilded_rose.mockStock
 import cn.xpbootcamp.gilded_rose.utils.assertFailWithMsg
 import org.assertj.core.api.Assertions.assertThat
+import org.junit.jupiter.api.Nested
 import org.junit.jupiter.api.Test
 import java.lang.IllegalArgumentException
 import java.time.LocalDateTime
@@ -55,6 +56,19 @@ internal class StockTest {
         val expiredSellIn = 0
         assertFailWithMsg(IllegalArgumentException::class, "invalid sellIn $expiredSellIn") {
             mockStock.copy(sellIn = expiredSellIn)
+        }
+    }
+
+    @Nested
+    inner class CurrentQualityTest {
+
+        @Nested
+        inner class CommonRules {
+            @Test
+            fun `should return current quality eqs to quality at the first day`() {
+                val stock = mockStock.copy(stockInAt = LocalDateTime.now())
+                assertThat(stock.currentQuality).isEqualTo(stock.quality)
+            }
         }
     }
 }
