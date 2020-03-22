@@ -1,5 +1,6 @@
 package cn.xpbootcamp.gilded_rose.domain
 
+import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 
@@ -19,7 +20,10 @@ internal class StorageTest {
     }
 
     @Test
-    fun `should be able to get list of stocks`() {
+    fun `should be able to get all the list of stocks that stocked in`() {
+        val stock = Stock()
+        stockService.stockIn(stock)
         val stocks = stockService.listAll()
+        assertThat(stocks).isEqualTo(listOf(stock))
     }
 }
