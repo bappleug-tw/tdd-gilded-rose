@@ -1,8 +1,11 @@
 package cn.xpbootcamp.gilded_rose.domain
 
 import org.assertj.core.api.Assertions.assertThat
+import org.assertj.core.api.Assertions.assertThatIllegalArgumentException
 import org.junit.jupiter.api.Test
+import java.lang.IllegalArgumentException
 import java.util.*
+import kotlin.test.assertFailsWith
 
 internal class StockTest {
 
@@ -21,5 +24,18 @@ internal class StockTest {
         assertThat(stock.stockInAt).isEqualTo(stockInDate)
         assertThat(stock.quantity).isEqualTo(100)
         assertThat(stock.sellIn).isEqualTo(20)
+    }
+
+    @Test
+    fun `should throw error when amount less than 1`() {
+        val negativeAmount = -1
+        assertFailsWith(IllegalArgumentException::class, "invalid amount $negativeAmount") {
+            Stock("name", negativeAmount, Date(), 100, 20)
+        }
+
+        val zeroAmount = 0
+        assertFailsWith(IllegalArgumentException::class, "invalid amount $zeroAmount") {
+            Stock("name", zeroAmount, Date(), 100, 20)
+        }
     }
 }
