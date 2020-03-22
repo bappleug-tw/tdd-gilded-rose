@@ -6,10 +6,11 @@ import java.util.*
 data class Stock(
         val name: String,
         val amount: Int,
-        val stockInAt: Date,
         val quality: Int,
         val sellIn: Int
 ) {
+        lateinit var stockInAt: Date
+
         init {
                 if (name.isEmpty()) throw IllegalArgumentException("invalid empty name")
                 if (amount < 1) throw IllegalArgumentException("invalid amount $$amount")
