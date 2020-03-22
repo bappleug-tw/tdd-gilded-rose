@@ -24,7 +24,7 @@ internal class StorageTest {
         stockService.stockIn(mockStock)
         val stocks = stockService.listAll()
         assertThat(stocks).isEqualTo(listOf(mockStock))
-        assertThat(stocks).allSatisfy { 
+        assertThat(stocks).allSatisfy {
             assertThat(it.currentQuality).isNotNull()
         }
     }
