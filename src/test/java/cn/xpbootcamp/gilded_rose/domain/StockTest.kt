@@ -15,13 +15,13 @@ internal class StockTest {
                 name = "name",
                 amount = 1,
                 stockInAt = stockInDate,
-                quality = 100,
+                quality = 30,
                 sellIn = 20
         )
         assertThat(stock.name).isEqualTo("name")
         assertThat(stock.amount).isEqualTo(1)
         assertThat(stock.stockInAt).isEqualTo(stockInDate)
-        assertThat(stock.quality).isEqualTo(100)
+        assertThat(stock.quality).isEqualTo(30)
         assertThat(stock.sellIn).isEqualTo(20)
     }
 
