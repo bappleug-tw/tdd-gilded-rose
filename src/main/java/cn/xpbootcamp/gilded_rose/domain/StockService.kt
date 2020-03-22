@@ -7,7 +7,6 @@ class StockService {
     private val stocks: MutableList<Stock> = mutableListOf()
 
     fun stockIn(stock: Stock): Stock {
-        stock.stockInAt = Date()
         stocks.add(stock)
         return stock
     }

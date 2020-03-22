@@ -7,9 +7,9 @@ data class Stock(
         val good: Good,
         val amount: Int,
         val quality: Int,
-        val sellIn: Int
+        val sellIn: Int,
+        val stockInAt: Date
 ) {
-        lateinit var stockInAt: Date
 
         init {
                 if (amount < 1) throw IllegalArgumentException("invalid amount $amount")

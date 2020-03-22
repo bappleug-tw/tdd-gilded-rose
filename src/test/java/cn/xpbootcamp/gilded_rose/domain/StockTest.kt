@@ -5,6 +5,7 @@ import cn.xpbootcamp.gilded_rose.utils.assertFailWithMsg
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 import java.lang.IllegalArgumentException
+import java.util.*
 
 internal class StockTest {
 
@@ -14,7 +15,8 @@ internal class StockTest {
                 good = Good.AGED_BRIE,
                 amount = 1,
                 quality = 30,
-                sellIn = 20
+                sellIn = 20,
+                stockInAt = Date()
         )
         assertThat(stock.good).isEqualTo(Good.AGED_BRIE)
         assertThat(stock.amount).isEqualTo(1)
@@ -39,12 +41,12 @@ internal class StockTest {
     fun `should throw error when quality is below 0 or above 50`() {
         val negativeQuality = -1
         assertFailWithMsg(IllegalArgumentException::class, "invalid quality $negativeQuality") {
-            Stock(Good.AGED_BRIE, 10, negativeQuality, 20)
+            mockStock.copy(quality = negativeQuality)
         }
 
         val tooBigQuality = 51
         assertFailWithMsg(IllegalArgumentException::class, "invalid quality $tooBigQuality") {
-            Stock(Good.AGED_BRIE, 10, tooBigQuality, 20)
+            mockStock.copy(quality = tooBigQuality)
         }
     }
 
