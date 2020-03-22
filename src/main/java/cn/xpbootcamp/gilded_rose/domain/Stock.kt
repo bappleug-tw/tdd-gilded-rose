@@ -1,5 +1,6 @@
 package cn.xpbootcamp.gilded_rose.domain
 
+import java.lang.IllegalArgumentException
 import java.util.*
 
 data class Stock(
@@ -8,4 +9,8 @@ data class Stock(
         val stockInAt: Date,
         val quantity: Int,
         val sellIn: Int
-)
+) {
+        init {
+                if (amount < 1) throw IllegalArgumentException("invalid amount $$amount")
+        }
+}
