@@ -57,3 +57,9 @@ Good作为所有商品的父类。
     - 实现查询功能
         - 实现查询接口
         - 实现价值计算策略
+
+
+## 疑问：
+- 从哪里开始？domain or app? model or service?
+- commit only test or test with implementation?
+
