@@ -4,7 +4,7 @@ class StockService {
 
     private val stocks: MutableList<Stock> = mutableListOf()
 
-    fun stockIn(stock: Stock): Unit {
+    fun stockIn(stock: Stock) {
         stocks.add(stock)
     }
 
