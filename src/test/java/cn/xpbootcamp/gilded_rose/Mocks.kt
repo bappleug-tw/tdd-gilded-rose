@@ -5,3 +5,7 @@ import cn.xpbootcamp.gilded_rose.domain.Stock
 import java.time.LocalDateTime
 
 val mockStock = Stock(Good.AGED_BRIE, 1, 30, 20, LocalDateTime.now())
+
+fun stockFrom(daysAgo: Long): Stock {
+    return mockStock.copy(stockInAt = LocalDateTime.now().minusDays(daysAgo))
+}

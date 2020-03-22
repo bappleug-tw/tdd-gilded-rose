@@ -1,6 +1,7 @@
 package cn.xpbootcamp.gilded_rose.domain
 
 import cn.xpbootcamp.gilded_rose.mockStock
+import cn.xpbootcamp.gilded_rose.stockFrom
 import cn.xpbootcamp.gilded_rose.utils.assertFailWithMsg
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Nested
@@ -65,9 +66,18 @@ internal class StockTest {
         @Nested
         inner class CommonRules {
             @Test
-            fun `should return current quality eqs to quality at the first day`() {
+            fun `should return current quality eqs to the stock in quality at the first day`() {
                 val stock = mockStock.copy(stockInAt = LocalDateTime.now())
                 assertThat(stock.currentQuality).isEqualTo(stock.quality)
+            }
+
+            @Test
+            fun `should return current quality eqs to the stock in quality - 1 * days passed`() {
+                val stockFromYesterday = stockFrom(2)
+                assertThat(stockFromYesterday.currentQuality).isEqualTo(stockFromYesterday.quality - 2)
+
+                val stockFrom10DaysAgo = stockFrom(10)
+                assertThat(stockFromYesterday.currentQuality).isEqualTo(stockFromYesterday.quality - 10)
             }
         }
     }
