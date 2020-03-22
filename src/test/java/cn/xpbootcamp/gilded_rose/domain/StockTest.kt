@@ -10,7 +10,7 @@ internal class StockTest {
     @Test
     fun `should have Name, Amount, StockInAt, Quantity, SellIn property as default constructor`() {
         val stock = Stock(
-                name = "name",
+                good = Good.AGED_BRIE,
                 amount = 1,
                 quality = 30,
                 sellIn = 20
