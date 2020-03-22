@@ -13,5 +13,6 @@ data class Stock(
         init {
                 if (name.isEmpty()) throw IllegalArgumentException("invalid empty name")
                 if (amount < 1) throw IllegalArgumentException("invalid amount $$amount")
+                if (quantity < 0 || quantity > 50) throw IllegalArgumentException("invalid quantity $quantity")
         }
 }
