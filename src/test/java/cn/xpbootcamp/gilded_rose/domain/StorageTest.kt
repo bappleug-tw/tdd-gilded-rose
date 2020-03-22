@@ -1,9 +1,9 @@
 package cn.xpbootcamp.gilded_rose.domain
 
+import cn.xpbootcamp.gilded_rose.mockStock
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
-import java.util.*
 
 internal class StorageTest {
 
@@ -16,20 +16,13 @@ internal class StorageTest {
 
     @Test
     fun `should be able to stock in`() {
-        val stock = Stock("name", 1,30, 20)
-        stockService.stockIn(stock)
-    }
-
-    @Test
-    fun `should assign stockInAt field when stock in`() {
-
+        stockService.stockIn(mockStock)
     }
 
     @Test
     fun `should be able to get all the list of stocks that stocked in`() {
-        val stock = Stock("name", 1, 30, 20)
-        stockService.stockIn(stock)
+        stockService.stockIn(mockStock)
         val stocks = stockService.listAll()
-        assertThat(stocks).isEqualTo(listOf(stock))
+        assertThat(stocks).isEqualTo(listOf(mockStock))
     }
 }

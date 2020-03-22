@@ -3,7 +3,6 @@ package cn.xpbootcamp.gilded_rose.domain
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 import java.lang.IllegalArgumentException
-import java.util.*
 import kotlin.test.assertFailsWith
 
 internal class StockTest {
