@@ -11,6 +11,7 @@ data class Stock(
         val sellIn: Int
 ) {
         init {
+                if (name.isEmpty()) throw IllegalArgumentException("invalid empty name")
                 if (amount < 1) throw IllegalArgumentException("invalid amount $$amount")
         }
 }
