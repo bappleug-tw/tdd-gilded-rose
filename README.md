@@ -61,5 +61,6 @@ Good作为所有商品的父类。
 
 ## 疑问：
 - 从哪里开始？domain or app? model or service?
-- commit only test or test with implementation?
+- commit only test or test with implementation? 
+Too many commits (sguash). 
 
