@@ -57,4 +57,12 @@ internal class StockTest {
             Stock("name", 10, Date(), tooBigQuality, 20)
         }
     }
+
+    @Test
+    fun `should throw error when sellIn is below 1 (expired)`() {
+        val expiredSellIn = 0
+        assertFailsWith(IllegalArgumentException::class, "invalid sellIn $expiredSellIn") {
+            Stock("name", 10, Date(), expiredSellIn, 20)
+        }
+    }
 }
