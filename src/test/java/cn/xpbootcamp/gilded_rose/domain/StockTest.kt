@@ -26,10 +26,20 @@ internal class StockTest {
 
     @Test
     fun `sellIn should decrease per day`() {
-        val stock = mockStock
+        val stockToday = mockStock
                 .expireIn(10)
                 .beenStockedFor(0)
-        assertThat(stock.sellIn).isEqualTo(10)
+        assertThat(stockToday.sellIn).isEqualTo(10)
+
+        val stock5DaysAgo = mockStock
+                .expireIn(10)
+                .beenStockedFor(5)
+        assertThat(stock5DaysAgo.sellIn).isEqualTo(5)
+
+        val stock20DaysAgo = mockStock
+                .expireIn(10)
+                .beenStockedFor(20)
+        assertThat(stock20DaysAgo.sellIn).isEqualTo(-10)
     }
 
     @Test
