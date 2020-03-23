@@ -66,19 +66,19 @@ internal class StockTest {
         @Nested
         inner class CommonRules {
             @Test
-            fun `should return current quality eqs to the stock in quality before expire`() {
+            fun `should return current quality eqs to the stockInQuality - dailyDepreciationRate * daysAfterStock`() {
                 val freshStockToday = stockFrom(0)
                 assertThat(freshStockToday.currentQuality).isEqualTo(freshStockToday.quality)
 
                 val stockFrom5DaysAgo = stockFrom(5).copy(
                         sellIn = 10
                 )
-                assertThat(stockFrom5DaysAgo.currentQuality).isEqualTo(stockFrom5DaysAgo.quality)
+                assertThat(stockFrom5DaysAgo.currentQuality).isEqualTo(stockFrom5DaysAgo.quality - 5 * DAILY_DEPRECIATION_RATE.BEFORE_EXPIRE)
 
                 val stockExpireTomorrow = stockFrom(10).copy(
                         sellIn = 10
                 )
-                assertThat(stockExpireTomorrow.currentQuality).isEqualTo(stockExpireTomorrow.quality)
+                assertThat(stockExpireTomorrow.currentQuality).isEqualTo(stockExpireTomorrow.quality - 10 * DAILY_DEPRECIATION_RATE.BEFORE_EXPIRE)
             }
 
             @Test
@@ -86,12 +86,12 @@ internal class StockTest {
                 val stockFromYesterday = stockFrom(12).copy(
                         sellIn = 10
                 )
-                assertThat(stockFromYesterday.currentQuality).isEqualTo(stockFromYesterday.quality - 2)
+                assertThat(stockFromYesterday.currentQuality).isEqualTo(stockFromYesterday.quality - 2 * DAILY_DEPRECIATION_RATE.AFTER_EXPIRE)
 
                 val stockFrom10DaysAgo = stockFrom(20).copy(
                         sellIn = 10
                 )
-                assertThat(stockFrom10DaysAgo.currentQuality).isEqualTo(stockFrom10DaysAgo.quality - 10)
+                assertThat(stockFrom10DaysAgo.currentQuality).isEqualTo(stockFrom10DaysAgo.quality - 10 * DAILY_DEPRECIATION_RATE.AFTER_EXPIRE)
             }
 
             @Test

@@ -25,3 +25,8 @@ data class Stock(
         if (sellIn < 1) throw IllegalArgumentException("invalid sellIn $sellIn")
     }
 }
+
+object DAILY_DEPRECIATION_RATE {
+    const val BEFORE_EXPIRE = 1
+    const val AFTER_EXPIRE = BEFORE_EXPIRE * 2
+}
