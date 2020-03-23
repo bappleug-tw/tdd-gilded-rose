@@ -122,5 +122,11 @@ internal class StockTest {
                 assertThat(stockExpireTomorrow.currentQuality).isEqualTo(40)
             }
         }
+
+        @Test
+        fun `quality should never accretion above 50`() {
+            val freshStockToday = agedBrieStockFrom(100)
+            assertThat(freshStockToday.currentQuality).isEqualTo(50)
+        }
     }
 }
