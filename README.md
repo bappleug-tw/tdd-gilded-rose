@@ -63,4 +63,6 @@ Good作为所有商品的父类。
 - 从哪里开始？domain or app? model or service?
 - commit only test or test with implementation? 
 Too many commits (sguash). 
+- 如果一开始就有清晰地设计思路（设计模式，类，抽象）还需要从最简化的实践开始么？
+考虑到测试重构的effort。
 
