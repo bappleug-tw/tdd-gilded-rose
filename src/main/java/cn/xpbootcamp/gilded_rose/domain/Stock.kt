@@ -21,7 +21,7 @@ data class Stock(
     var qualityCalculator: IQualityCalculator = when (good) {
         AGED_BRIE -> AgedBrieQualityCalculator()
         SULFURAS -> SulfurasQualityCalculator()
-        BACKSTAGE_PASS -> TODO()
+        BACKSTAGE_PASS -> BackStagePassQualityCalculator()
         OTHER -> CommonQualityCalculator()
     }
 

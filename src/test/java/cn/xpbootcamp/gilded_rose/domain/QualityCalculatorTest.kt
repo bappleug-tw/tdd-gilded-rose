@@ -121,11 +121,11 @@ class QualityCalculatorTest {
                     .expireIn(30)
             Assertions.assertThat(stock.quality).isEqualTo(20)
 
-            val stockExpireTomorrow = stock.of(Good.SULFURAS)
+            stock = stock.of(Good.BACKSTAGE_PASS)
                     .withQuality(30)
                     .beenStockedFor(20)
                     .expireIn(30)
-            Assertions.assertThat(stockExpireTomorrow.quality).isEqualTo(10)
+            Assertions.assertThat(stock.quality).isEqualTo(10)
         }
     }
 }
