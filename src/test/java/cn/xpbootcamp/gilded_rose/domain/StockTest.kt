@@ -66,22 +66,30 @@ internal class StockTest {
         @Nested
         inner class CommonRules {
             @Test
-            fun `should return current quality eqs to the stock in quality at the first day`() {
-                val stock = mockStock.copy(stockInAt = LocalDate.now())
-                assertThat(stock.currentQuality).isEqualTo(stock.quality)
+            fun `should return current quality eqs to the stock in quality before expire`() {
+                val freshStockToday = stockFrom(0)
+                assertThat(freshStockToday.currentQuality).isEqualTo(freshStockToday.quality)
+
+                val stockFrom5DaysAgo = stockFrom(5).copy(
+                        sellIn = 10
+                )
+                assertThat(stockFrom5DaysAgo.currentQuality).isEqualTo(stockFrom5DaysAgo.quality)
+
+                val stockExpireTomorrow = stockFrom(10).copy(
+                        sellIn = 10
+                )
+                assertThat(stockExpireTomorrow.currentQuality).isEqualTo(stockExpireTomorrow.quality)
             }
 
             @Test
             fun `should return current quality eqs to the stock in quality - 1 * days after expire`() {
                 val stockFromYesterday = stockFrom(12).copy(
-                        sellIn = 10,
-                        quality = 30
+                        sellIn = 10
                 )
                 assertThat(stockFromYesterday.currentQuality).isEqualTo(stockFromYesterday.quality - 2)
 
                 val stockFrom10DaysAgo = stockFrom(20).copy(
-                        sellIn = 10,
-                        quality = 30
+                        sellIn = 10
                 )
                 assertThat(stockFrom10DaysAgo.currentQuality).isEqualTo(stockFrom10DaysAgo.quality - 10)
             }
