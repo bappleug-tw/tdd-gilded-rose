@@ -5,7 +5,7 @@ import java.time.temporal.ChronoUnit
 import kotlin.math.max
 import kotlin.math.min
 
-class QualityCalculator {
+class QualityCalculator : IQualityCalculator {
     fun currentQuality(good: Good, stockInAt: LocalDate, stockInQuality: Long, sellIn: Long): Long {
         val stockedDays = stockInAt.until(LocalDate.now(), ChronoUnit.DAYS)
         return when (good) {
@@ -18,5 +18,4 @@ class QualityCalculator {
             })
         }
     }
-
 }
