@@ -73,12 +73,12 @@ internal class StockTest {
                 val stockFrom5DaysAgo = stockFrom(5).copy(
                         sellIn = 10
                 )
-                assertThat(stockFrom5DaysAgo.currentQuality).isEqualTo(stockFrom5DaysAgo.quality - 5 * DAILY_DEPRECIATION_RATE.BEFORE_EXPIRE)
+                assertThat(stockFrom5DaysAgo.currentQuality).isEqualTo(25)
 
                 val stockExpireTomorrow = stockFrom(10).copy(
                         sellIn = 10
                 )
-                assertThat(stockExpireTomorrow.currentQuality).isEqualTo(stockExpireTomorrow.quality - 10 * DAILY_DEPRECIATION_RATE.BEFORE_EXPIRE)
+                assertThat(stockExpireTomorrow.currentQuality).isEqualTo(20)
             }
 
             @Test
@@ -86,12 +86,12 @@ internal class StockTest {
                 val stockFromYesterday = stockFrom(12).copy(
                         sellIn = 10
                 )
-                assertThat(stockFromYesterday.currentQuality).isEqualTo(stockFromYesterday.quality - 2 * DAILY_DEPRECIATION_RATE.AFTER_EXPIRE)
+                assertThat(stockFromYesterday.currentQuality).isEqualTo(16)
 
                 val stockFrom10DaysAgo = stockFrom(20).copy(
                         sellIn = 10
                 )
-                assertThat(stockFrom10DaysAgo.currentQuality).isEqualTo(stockFrom10DaysAgo.quality - 10 * DAILY_DEPRECIATION_RATE.AFTER_EXPIRE)
+                assertThat(stockFrom10DaysAgo.currentQuality).isEqualTo(0)
             }
 
             @Test
