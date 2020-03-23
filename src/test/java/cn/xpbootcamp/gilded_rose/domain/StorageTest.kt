@@ -1,6 +1,6 @@
 package cn.xpbootcamp.gilded_rose.domain
 
-import cn.xpbootcamp.gilded_rose.mockStock
+import cn.xpbootcamp.gilded_rose.utils.mockStock
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test

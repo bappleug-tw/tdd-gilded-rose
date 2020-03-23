@@ -1,7 +1,6 @@
 package cn.xpbootcamp.gilded_rose.domain
 
-import cn.xpbootcamp.gilded_rose.*
-import cn.xpbootcamp.gilded_rose.utils.assertFailWithMsg
+import cn.xpbootcamp.gilded_rose.utils.*
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 import java.lang.IllegalArgumentException

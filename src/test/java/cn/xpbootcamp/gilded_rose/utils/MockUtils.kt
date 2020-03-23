@@ -1,4 +1,4 @@
-package cn.xpbootcamp.gilded_rose
+package cn.xpbootcamp.gilded_rose.utils
 
 import cn.xpbootcamp.gilded_rose.domain.Good
 import cn.xpbootcamp.gilded_rose.domain.Stock

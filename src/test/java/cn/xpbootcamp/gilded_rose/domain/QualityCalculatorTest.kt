@@ -1,6 +1,6 @@
 package cn.xpbootcamp.gilded_rose.domain
 
-import cn.xpbootcamp.gilded_rose.*
+import cn.xpbootcamp.gilded_rose.utils.*
 import org.assertj.core.api.Assertions
 import org.junit.jupiter.api.Nested
 import org.junit.jupiter.api.Test
