@@ -47,7 +47,7 @@ class BackStagePassQualityCalculator : IQualityCalculator {
 
     override fun currentQuality(good: Good, stockInAt: LocalDate, stockInQuality: Long, sellIn: Long): Long {
         val stockedDays = stockInAt.until(LocalDate.now(), ChronoUnit.DAYS)
-        return max(0, when {
+        return min(50, max(0, when {
             sellIn - stockedDays >= 10 ->
                 stockInQuality + stockedDays * DAILY_ACCRETION_RATE_10_MORE_DAYS_BEFORE_EXPIRE
             sellIn - stockedDays >= 5 -> {
@@ -62,7 +62,6 @@ class BackStagePassQualityCalculator : IQualityCalculator {
                         (stockedDays - (sellIn - 5)) * DAILY_ACCRETION_RATE_5_LESS_DAYS_BEFORE_EXPIRE
             }
             else -> 0
-        })
-//        stockInQuality - sellIn * DAILY_DEPRECIATION_RATE_BEFORE_EXPIRE - (stockedDays - sellIn) * DAILY_DEPRECIATION_RATE_AFTER_EXPIRE
+        }))
     }
 }

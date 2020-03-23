@@ -160,7 +160,7 @@ class QualityCalculatorTest {
 
         @Test
         fun `quality should never rise higher than 50`() {
-            var stock = mockStock.of(Good.BACKSTAGE_PASS)
+            val stock = mockStock.of(Good.BACKSTAGE_PASS)
                     .withQuality(40)
                     .beenStockedFor(15)
                     .expireIn(15)
