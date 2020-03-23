@@ -16,3 +16,10 @@ fun agedBrieStockFrom(daysAgo: Long): Stock {
             stockInAt = LocalDate.now().minusDays(daysAgo)
     )
 }
+
+fun sulfurasStockFrom(daysAgo: Long): Stock {
+    return mockStock.copy(
+            good = Good.SULFURAS,
+            stockInAt = LocalDate.now().minusDays(daysAgo)
+    )
+}

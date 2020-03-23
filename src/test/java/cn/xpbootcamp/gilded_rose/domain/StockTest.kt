@@ -3,6 +3,7 @@ package cn.xpbootcamp.gilded_rose.domain
 import cn.xpbootcamp.gilded_rose.agedBrieStockFrom
 import cn.xpbootcamp.gilded_rose.mockStock
 import cn.xpbootcamp.gilded_rose.stockFrom
+import cn.xpbootcamp.gilded_rose.sulfurasStockFrom
 import cn.xpbootcamp.gilded_rose.utils.assertFailWithMsg
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Nested
@@ -126,6 +127,25 @@ internal class StockTest {
             fun `quality should never accretion above 50`() {
                 val freshStockToday = agedBrieStockFrom(100)
                 assertThat(freshStockToday.currentQuality).isEqualTo(50)
+            }
+        }
+
+        @Nested
+        inner class SulfurasRules {
+            @Test
+            fun `current quality should be always equal to stock in quality`() {
+                val freshStockToday = sulfurasStockFrom(0)
+                assertThat(freshStockToday.currentQuality).isEqualTo(30)
+
+                val stockFrom5DaysAgo = sulfurasStockFrom(10).copy(
+                        sellIn = 10
+                )
+                assertThat(stockFrom5DaysAgo.currentQuality).isEqualTo(30)
+
+                val stockExpireTomorrow = sulfurasStockFrom(100_000).copy(
+                        sellIn = 10
+                )
+                assertThat(stockExpireTomorrow.currentQuality).isEqualTo(30)
             }
         }
     }
