@@ -25,6 +25,14 @@ internal class StockTest {
     }
 
     @Test
+    fun `sellIn should decrease per day`() {
+        val stock = mockStock
+                .expireIn(10)
+                .beenStockedFor(0)
+        assertThat(stock.sellIn).isEqualTo(10)
+    }
+
+    @Test
     fun `should throw error when amount is less than 1`() {
         val negativeAmount = -1
         assertFailWithMsg(IllegalArgumentException::class, "invalid amount $negativeAmount") {
