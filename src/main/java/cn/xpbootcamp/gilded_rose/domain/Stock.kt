@@ -4,6 +4,7 @@ import java.lang.IllegalArgumentException
 import java.time.LocalDate
 import java.time.temporal.ChronoUnit.*
 import kotlin.math.max
+import kotlin.math.min
 
 data class Stock(
         val good: Good,
@@ -16,17 +17,13 @@ data class Stock(
     val currentQuality: Long
         get() {
             val stockedDays = stockInAt.until(LocalDate.now(), DAYS)
-            when (good) {
-                Good.AGED_BRIE -> {
-                    return quality - stockedDays * AGED_BRIE_DAILY_DEPRECIATION_RATE.BEFORE_EXPIRE
-                }
-                else -> {
-                    return max(if (stockedDays < sellIn) {
-                        quality - stockedDays * COMMON_DAILY_DEPRECIATION_RATE.BEFORE_EXPIRE
-                    } else {
-                        quality - sellIn * COMMON_DAILY_DEPRECIATION_RATE.BEFORE_EXPIRE - (stockedDays - sellIn) * COMMON_DAILY_DEPRECIATION_RATE.AFTER_EXPIRE
-                    }, 0)
-                }
+            return when (good) {
+                Good.AGED_BRIE -> min(50, quality - stockedDays * AGED_BRIE_DAILY_DEPRECIATION_RATE.BEFORE_EXPIRE)
+                else -> max(0, if (stockedDays < sellIn) {
+                    quality - stockedDays * COMMON_DAILY_DEPRECIATION_RATE.BEFORE_EXPIRE
+                } else {
+                    quality - sellIn * COMMON_DAILY_DEPRECIATION_RATE.BEFORE_EXPIRE - (stockedDays - sellIn) * COMMON_DAILY_DEPRECIATION_RATE.AFTER_EXPIRE
+                })
             }
         }
 
