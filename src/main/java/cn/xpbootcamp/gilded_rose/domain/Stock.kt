@@ -2,6 +2,7 @@ package cn.xpbootcamp.gilded_rose.domain
 
 import java.lang.IllegalArgumentException
 import java.time.LocalDate
+import java.time.temporal.ChronoUnit.*
 
 data class Stock(
         val good: Good,
@@ -12,7 +13,7 @@ data class Stock(
 ) {
 
     val currentQuality: Int
-        get() = quality
+        get() = quality - stockInAt.until(LocalDate.now(), DAYS).toInt()
 
     init {
         if (amount < 1) throw IllegalArgumentException("invalid amount $amount")
