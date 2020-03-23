@@ -10,7 +10,7 @@ class QualityCalculatorTest {
     @Nested
     inner class CommonGoods {
         @Test
-        fun `should return current quality eqs to the stockInQuality - dailyDepreciationRate * daysAfterStock`() {
+        fun `should return quality eqs to the stockInQuality - dailyDepreciationRate * daysAfterStock`() {
             val freshStockToday = mockStock.of(Good.OTHER)
                     .withQuality(30)
                     .beenStockedFor(0)
@@ -30,7 +30,7 @@ class QualityCalculatorTest {
         }
 
         @Test
-        fun `should return current quality eqs to the stock in quality - 1 * days after expire`() {
+        fun `should return quality eqs to the stockInQuality - 1 * days after expire`() {
             val stockFromYesterday = mockStock.of(Good.OTHER)
                     .withQuality(30)
                     .beenStockedFor(12)
@@ -42,7 +42,7 @@ class QualityCalculatorTest {
         }
 
         @Test
-        fun `should return current quality never below 0`() {
+        fun `should return quality never below 0`() {
             val stockFromYesterday = mockStock.of(Good.OTHER)
                     .withQuality(30)
                     .beenStockedFor(500)
@@ -54,7 +54,7 @@ class QualityCalculatorTest {
     @Nested
     inner class AgedBrie {
         @Test
-        fun `should return current quality eqs to the stockInQuality + dailyAccretionRate * daysAfterStock`() {
+        fun `should return quality eqs to the stockInQuality + dailyAccretionRate * daysAfterStock`() {
             val freshStockToday = mockStock.of(Good.AGED_BRIE)
                     .withQuality(30)
                     .beenStockedFor(0)
@@ -85,7 +85,7 @@ class QualityCalculatorTest {
     @Nested
     inner class Sulfuras {
         @Test
-        fun `current quality should be always equal to stock in quality`() {
+        fun `quality should be always equal to stockInQuality`() {
             val freshStockToday = mockStock.of(Good.SULFURAS)
                     .withQuality(30)
                     .beenStockedFor(0)
@@ -105,26 +105,5 @@ class QualityCalculatorTest {
         }
     }
 
-    @Nested
-    inner class BackstagePass {
-        @Test
-        fun `current quality should be always equal to stock in quality`() {
-            val freshStockToday = mockStock.of(Good.SULFURAS)
-                    .withQuality(30)
-                    .beenStockedFor(0)
-            Assertions.assertThat(freshStockToday.quality).isEqualTo(30)
-
-            val stockFrom5DaysAgo = mockStock.of(Good.SULFURAS)
-                    .withQuality(30)
-                    .beenStockedFor(10)
-                    .expireIn(10)
-            Assertions.assertThat(stockFrom5DaysAgo.quality).isEqualTo(30)
-
-            val stockExpireTomorrow = mockStock.of(Good.SULFURAS)
-                    .withQuality(30)
-                    .beenStockedFor(100_000)
-                    .expireIn(10)
-            Assertions.assertThat(stockExpireTomorrow.quality).isEqualTo(30)
-        }
-    }
+    
 }
