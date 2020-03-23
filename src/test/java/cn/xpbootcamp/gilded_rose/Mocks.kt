@@ -6,20 +6,7 @@ import java.time.LocalDate
 
 val mockStock = Stock(Good.OTHER, 1, 30, 20, LocalDate.now())
 
-fun stockFrom(daysAgo: Long): Stock {
-    return mockStock.copy(stockInAt = LocalDate.now().minusDays(daysAgo))
-}
-
-fun agedBrieStockFrom(daysAgo: Long): Stock {
-    return mockStock.copy(
-            good = Good.AGED_BRIE,
-            stockInAt = LocalDate.now().minusDays(daysAgo)
-    )
-}
-
-fun sulfurasStockFrom(daysAgo: Long): Stock {
-    return mockStock.copy(
-            good = Good.SULFURAS,
-            stockInAt = LocalDate.now().minusDays(daysAgo)
-    )
-}
+fun Stock.of(good: Good) = this.copy(good = good)
+fun Stock.withQuality(quality: Long) = this.copy(quality = quality)
+fun Stock.expireIn(sellIn: Long) = this.copy(sellIn = sellIn)
+fun Stock.beenStockedFor(days: Long) = this.copy(stockInAt = LocalDate.now().minusDays(days))
