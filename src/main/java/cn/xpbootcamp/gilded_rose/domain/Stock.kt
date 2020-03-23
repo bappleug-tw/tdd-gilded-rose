@@ -16,12 +16,18 @@ data class Stock(
     val currentQuality: Long
         get() {
             val stockedDays = stockInAt.until(LocalDate.now(), DAYS)
-            return max(
-                    if (stockedDays < sellIn) {
-                        quality - stockedDays * DAILY_DEPRECIATION_RATE.BEFORE_EXPIRE
+            when (good) {
+                Good.AGED_BRIE -> {
+                    return quality - stockedDays * AGED_BRIE_DAILY_DEPRECIATION_RATE.BEFORE_EXPIRE
+                }
+                else -> {
+                    return max(if (stockedDays < sellIn) {
+                        quality - stockedDays * COMMON_DAILY_DEPRECIATION_RATE.BEFORE_EXPIRE
                     } else {
-                        quality - sellIn * DAILY_DEPRECIATION_RATE.BEFORE_EXPIRE - (stockedDays - sellIn) * DAILY_DEPRECIATION_RATE.AFTER_EXPIRE
+                        quality - sellIn * COMMON_DAILY_DEPRECIATION_RATE.BEFORE_EXPIRE - (stockedDays - sellIn) * COMMON_DAILY_DEPRECIATION_RATE.AFTER_EXPIRE
                     }, 0)
+                }
+            }
         }
 
     init {
@@ -31,7 +37,12 @@ data class Stock(
     }
 }
 
-object DAILY_DEPRECIATION_RATE {
+object COMMON_DAILY_DEPRECIATION_RATE {
     const val BEFORE_EXPIRE = 1
     const val AFTER_EXPIRE = BEFORE_EXPIRE * 2
+}
+
+object AGED_BRIE_DAILY_DEPRECIATION_RATE {
+    const val BEFORE_EXPIRE = -1
+    const val AFTER_EXPIRE = -1
 }

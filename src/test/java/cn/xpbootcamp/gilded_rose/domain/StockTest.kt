@@ -111,12 +111,12 @@ internal class StockTest {
                 val freshStockToday = agedBrieStockFrom(0)
                 assertThat(freshStockToday.currentQuality).isEqualTo(freshStockToday.quality)
 
-                val stockFrom5DaysAgo = stockFrom(5).copy(
+                val stockFrom5DaysAgo = agedBrieStockFrom(5).copy(
                         sellIn = 10
                 )
                 assertThat(stockFrom5DaysAgo.currentQuality).isEqualTo(35)
 
-                val stockExpireTomorrow = stockFrom(10).copy(
+                val stockExpireTomorrow = agedBrieStockFrom(10).copy(
                         sellIn = 10
                 )
                 assertThat(stockExpireTomorrow.currentQuality).isEqualTo(40)
