@@ -3,17 +3,21 @@ package cn.xpbootcamp.gilded_rose.domain
 import java.lang.IllegalArgumentException
 import java.time.LocalDate
 import java.time.temporal.ChronoUnit.*
+import kotlin.math.max
 
 data class Stock(
         val good: Good,
         val amount: Int,
-        val quality: Int,
-        val sellIn: Int,
+        val quality: Long,
+        val sellIn: Long,
         val stockInAt: LocalDate
 ) {
 
-    val currentQuality: Int
-        get() = quality - stockInAt.until(LocalDate.now(), DAYS).toInt()
+    val currentQuality: Long
+        get() {
+            val expiredDays = max(0, stockInAt.plusDays(sellIn).until(LocalDate.now(), DAYS))
+            return quality - expiredDays * 1
+        }
 
     init {
         if (amount < 1) throw IllegalArgumentException("invalid amount $amount")

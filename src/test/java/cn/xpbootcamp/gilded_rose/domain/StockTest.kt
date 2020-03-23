@@ -41,12 +41,12 @@ internal class StockTest {
 
     @Test
     fun `should throw error when quality is below 0 or above 50`() {
-        val negativeQuality = -1
+        val negativeQuality = -1L
         assertFailWithMsg(IllegalArgumentException::class, "invalid quality $negativeQuality") {
             mockStock.copy(quality = negativeQuality)
         }
 
-        val tooBigQuality = 51
+        val tooBigQuality = 51L
         assertFailWithMsg(IllegalArgumentException::class, "invalid quality $tooBigQuality") {
             mockStock.copy(quality = tooBigQuality)
         }
@@ -54,7 +54,7 @@ internal class StockTest {
 
     @Test
     fun `should throw error when sellIn is below 1`() {
-        val expiredSellIn = 0
+        val expiredSellIn = 0L
         assertFailWithMsg(IllegalArgumentException::class, "invalid sellIn $expiredSellIn") {
             mockStock.copy(sellIn = expiredSellIn)
         }
