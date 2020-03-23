@@ -105,5 +105,27 @@ class QualityCalculatorTest {
         }
     }
 
-    
+    @Nested
+    inner class BackstagePass {
+        @Test
+        fun `quality should rise at dailyDepreciationRate per days 10 days before the show`() {
+            var stock = mockStock.of(Good.BACKSTAGE_PASS)
+                    .withQuality(30)
+                    .beenStockedFor(0)
+                    .expireIn(30)
+            Assertions.assertThat(stock.quality).isEqualTo(30)
+
+            stock = stock.of(Good.BACKSTAGE_PASS)
+                    .withQuality(30)
+                    .beenStockedFor(10)
+                    .expireIn(30)
+            Assertions.assertThat(stock.quality).isEqualTo(20)
+
+            val stockExpireTomorrow = stock.of(Good.SULFURAS)
+                    .withQuality(30)
+                    .beenStockedFor(20)
+                    .expireIn(30)
+            Assertions.assertThat(stockExpireTomorrow.quality).isEqualTo(10)
+        }
+    }
 }
