@@ -166,5 +166,14 @@ class QualityCalculatorTest {
                     .expireIn(15)
             Assertions.assertThat(stock.quality).isEqualTo(50)
         }
+
+        @Test
+        fun `quality should be 0 after expire`() {
+            val stock = mockStock.of(Good.BACKSTAGE_PASS)
+                    .withQuality(40)
+                    .beenStockedFor(16)
+                    .expireIn(15)
+            Assertions.assertThat(stock.quality).isEqualTo(0)
+        }
     }
 }
