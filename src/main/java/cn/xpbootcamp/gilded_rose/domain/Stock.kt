@@ -1,5 +1,6 @@
 package cn.xpbootcamp.gilded_rose.domain
 
+import cn.xpbootcamp.gilded_rose.domain.Good.*
 import java.lang.IllegalArgumentException
 import java.time.LocalDate
 
@@ -14,21 +15,16 @@ data class Stock(
     val currentQuality: Long
         get() = qualityCalculator.currentQuality(good, stockInAt, quality, sellIn)
 
-    var qualityCalculator: QualityCalculator = QualityCalculator()
+    var qualityCalculator: IQualityCalculator = when (good) {
+        AGED_BRIE -> AgedBrieQualityCalculator()
+        SULFURAS -> SulfurasQualityCalculator()
+        BACKSTAGE_PASS -> TODO()
+        OTHER -> CommonQualityCalculator()
+    }
 
     init {
         if (amount < 1) throw IllegalArgumentException("invalid amount $amount")
         if (quality < 0 || quality > 50) throw IllegalArgumentException("invalid quality $quality")
         if (sellIn < 1) throw IllegalArgumentException("invalid sellIn $sellIn")
     }
-}
-
-object COMMON_DAILY_DEPRECIATION_RATE {
-    const val BEFORE_EXPIRE = 1
-    const val AFTER_EXPIRE = BEFORE_EXPIRE * 2
-}
-
-object AGED_BRIE_DAILY_DEPRECIATION_RATE {
-    const val BEFORE_EXPIRE = -1
-    const val AFTER_EXPIRE = -1
 }
