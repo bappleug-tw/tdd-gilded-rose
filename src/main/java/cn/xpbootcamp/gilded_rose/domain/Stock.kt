@@ -7,13 +7,15 @@ import java.time.LocalDate
 data class Stock(
         val good: Good,
         val amount: Int,
-        val quality: Long,
-        val sellIn: Long,
+        val qualityAtStockIn: Long,
+        val sellInAtStockIn: Long,
         val stockInAt: LocalDate
 ) {
 
-    val currentQuality: Long
-        get() = qualityCalculator.currentQuality(good, stockInAt, quality, sellIn)
+    val sellIn: Long = 0
+    
+    val quality: Long
+        get() = qualityCalculator.currentQuality(good, stockInAt, qualityAtStockIn, sellInAtStockIn)
 
     var qualityCalculator: IQualityCalculator = when (good) {
         AGED_BRIE -> AgedBrieQualityCalculator()
@@ -24,7 +26,7 @@ data class Stock(
 
     init {
         if (amount < 1) throw IllegalArgumentException("invalid amount $amount")
-        if (quality < 0 || quality > 50) throw IllegalArgumentException("invalid quality $quality")
-        if (sellIn < 1) throw IllegalArgumentException("invalid sellIn $sellIn")
+        if (qualityAtStockIn < 0 || qualityAtStockIn > 50) throw IllegalArgumentException("invalid quality $qualityAtStockIn")
+        if (sellInAtStockIn < 1) throw IllegalArgumentException("invalid sellIn $sellInAtStockIn")
     }
 }
