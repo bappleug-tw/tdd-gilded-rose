@@ -3,6 +3,7 @@ package cn.xpbootcamp.gilded_rose.domain
 import cn.xpbootcamp.gilded_rose.domain.Good.*
 import java.lang.IllegalArgumentException
 import java.time.LocalDate
+import java.time.temporal.ChronoUnit
 
 data class Stock(
         val good: Good,
@@ -12,7 +13,7 @@ data class Stock(
         val stockInAt: LocalDate
 ) {
 
-    val sellIn: Long = sellInAtStockIn
+    val sellIn: Long = sellInAtStockIn - stockInAt.until(LocalDate.now(), ChronoUnit.DAYS)
 
     val quality: Long
         get() = qualityCalculator.currentQuality(good, stockInAt, qualityAtStockIn, sellInAtStockIn)
