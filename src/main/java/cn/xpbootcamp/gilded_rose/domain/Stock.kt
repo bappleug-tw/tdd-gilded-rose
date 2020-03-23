@@ -12,8 +12,8 @@ data class Stock(
         val stockInAt: LocalDate
 ) {
 
-    val sellIn: Long = 0
-    
+    val sellIn: Long = sellInAtStockIn
+
     val quality: Long
         get() = qualityCalculator.currentQuality(good, stockInAt, qualityAtStockIn, sellInAtStockIn)
 
