@@ -157,5 +157,14 @@ class QualityCalculatorTest {
                     .expireIn(15)
             Assertions.assertThat(stock.quality).isEqualTo(50)
         }
+
+        @Test
+        fun `quality should never rise higher than 50`() {
+            var stock = mockStock.of(Good.BACKSTAGE_PASS)
+                    .withQuality(40)
+                    .beenStockedFor(15)
+                    .expireIn(15)
+            Assertions.assertThat(stock.quality).isEqualTo(50)
+        }
     }
 }
