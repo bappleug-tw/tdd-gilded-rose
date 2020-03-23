@@ -1,14 +1,14 @@
 package cn.xpbootcamp.gilded_rose.domain
 
 import java.lang.IllegalArgumentException
-import java.time.LocalDateTime
+import java.time.LocalDate
 
 data class Stock(
         val good: Good,
         val amount: Int,
         val quality: Int,
         val sellIn: Int,
-        val stockInAt: LocalDateTime
+        val stockInAt: LocalDate
 ) {
 
     val currentQuality: Int

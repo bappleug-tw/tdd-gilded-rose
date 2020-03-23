@@ -7,7 +7,7 @@ import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Nested
 import org.junit.jupiter.api.Test
 import java.lang.IllegalArgumentException
-import java.time.LocalDateTime
+import java.time.LocalDate
 
 internal class StockTest {
 
@@ -18,7 +18,7 @@ internal class StockTest {
                 amount = 1,
                 quality = 30,
                 sellIn = 20,
-                stockInAt = LocalDateTime.now()
+                stockInAt = LocalDate.now()
         )
         assertThat(stock.good).isEqualTo(Good.AGED_BRIE)
         assertThat(stock.amount).isEqualTo(1)
@@ -67,7 +67,7 @@ internal class StockTest {
         inner class CommonRules {
             @Test
             fun `should return current quality eqs to the stock in quality at the first day`() {
-                val stock = mockStock.copy(stockInAt = LocalDateTime.now())
+                val stock = mockStock.copy(stockInAt = LocalDate.now())
                 assertThat(stock.currentQuality).isEqualTo(stock.quality)
             }
 
