@@ -55,6 +55,12 @@ class BackStagePassQualityCalculator : IQualityCalculator {
                         (sellIn - 10) * DAILY_ACCRETION_RATE_10_MORE_DAYS_BEFORE_EXPIRE +
                         (stockedDays - (sellIn - 10)) * DAILY_ACCRETION_RATE_10_TO_5_DAYS_BEFORE_EXPIRE
             }
+            sellIn - stockedDays >= 0 -> {
+                stockInQuality +
+                        (sellIn - 10) * DAILY_ACCRETION_RATE_10_MORE_DAYS_BEFORE_EXPIRE +
+                        5 * DAILY_ACCRETION_RATE_10_TO_5_DAYS_BEFORE_EXPIRE +
+                        (stockedDays - (sellIn - 5)) * DAILY_ACCRETION_RATE_5_LESS_DAYS_BEFORE_EXPIRE
+            }
             else -> 0
         })
 //        stockInQuality - sellIn * DAILY_DEPRECIATION_RATE_BEFORE_EXPIRE - (stockedDays - sellIn) * DAILY_DEPRECIATION_RATE_AFTER_EXPIRE
