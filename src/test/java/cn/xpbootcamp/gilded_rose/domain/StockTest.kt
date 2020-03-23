@@ -1,5 +1,6 @@
 package cn.xpbootcamp.gilded_rose.domain
 
+import cn.xpbootcamp.gilded_rose.agedBrieStockFrom
 import cn.xpbootcamp.gilded_rose.mockStock
 import cn.xpbootcamp.gilded_rose.stockFrom
 import cn.xpbootcamp.gilded_rose.utils.assertFailWithMsg
@@ -100,6 +101,25 @@ internal class StockTest {
                         sellIn = 100
                 )
                 assertThat(stockFromYesterday.currentQuality).isEqualTo(0)
+            }
+        }
+
+        @Nested
+        inner class AgedBrieRules {
+            @Test
+            fun `should return current quality eqs to the stockInQuality + dailyAccretionRate * daysAfterStock`() {
+                val freshStockToday = agedBrieStockFrom(0)
+                assertThat(freshStockToday.currentQuality).isEqualTo(freshStockToday.quality)
+
+                val stockFrom5DaysAgo = stockFrom(5).copy(
+                        sellIn = 10
+                )
+                assertThat(stockFrom5DaysAgo.currentQuality).isEqualTo(35)
+
+                val stockExpireTomorrow = stockFrom(10).copy(
+                        sellIn = 10
+                )
+                assertThat(stockExpireTomorrow.currentQuality).isEqualTo(40)
             }
         }
     }
