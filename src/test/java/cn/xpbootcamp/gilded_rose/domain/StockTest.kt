@@ -93,6 +93,14 @@ internal class StockTest {
                 )
                 assertThat(stockFrom10DaysAgo.currentQuality).isEqualTo(stockFrom10DaysAgo.quality - 10)
             }
+
+            @Test
+            fun `should return current quality never below 0`() {
+                val stockFromYesterday = stockFrom(500).copy(
+                        sellIn = 100
+                )
+                assertThat(stockFromYesterday.currentQuality).isEqualTo(0)
+            }
         }
     }
 }
