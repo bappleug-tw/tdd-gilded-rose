@@ -127,5 +127,20 @@ class QualityCalculatorTest {
                     .expireIn(30)
             Assertions.assertThat(stock.quality).isEqualTo(40)
         }
+
+        @Test
+        fun `quality should rise at medium rate per days 5 days before the show`() {
+            var stock = mockStock.of(Good.BACKSTAGE_PASS)
+                    .withQuality(20)
+                    .beenStockedFor(6)
+                    .expireIn(15)
+            Assertions.assertThat(stock.quality).isEqualTo(27)
+
+            stock = mockStock.of(Good.BACKSTAGE_PASS)
+                    .withQuality(20)
+                    .beenStockedFor(10)
+                    .expireIn(15)
+            Assertions.assertThat(stock.quality).isEqualTo(35)
+        }
     }
 }
