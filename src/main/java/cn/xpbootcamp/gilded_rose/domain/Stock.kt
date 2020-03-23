@@ -19,6 +19,7 @@ data class Stock(
             val stockedDays = stockInAt.until(LocalDate.now(), DAYS)
             return when (good) {
                 Good.AGED_BRIE -> min(50, quality - stockedDays * AGED_BRIE_DAILY_DEPRECIATION_RATE.BEFORE_EXPIRE)
+                Good.SULFURAS -> quality
                 else -> max(0, if (stockedDays < sellIn) {
                     quality - stockedDays * COMMON_DAILY_DEPRECIATION_RATE.BEFORE_EXPIRE
                 } else {
