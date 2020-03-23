@@ -16,7 +16,7 @@ data class Stock(
     val currentQuality: Long
         get() {
             val expiredDays = max(0, stockInAt.plusDays(sellIn).until(LocalDate.now(), DAYS))
-            return quality - expiredDays * 1
+            return max(quality - expiredDays * 1, 0)
         }
 
     init {
