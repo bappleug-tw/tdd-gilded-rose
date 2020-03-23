@@ -108,24 +108,24 @@ class QualityCalculatorTest {
     @Nested
     inner class BackstagePass {
         @Test
-        fun `quality should rise at dailyDepreciationRate per days 10 days before the show`() {
+        fun `quality should rise at lowest rate per days 10 days before the show`() {
             var stock = mockStock.of(Good.BACKSTAGE_PASS)
-                    .withQuality(30)
+                    .withQuality(20)
                     .beenStockedFor(0)
-                    .expireIn(30)
-            Assertions.assertThat(stock.quality).isEqualTo(30)
-
-            stock = stock.of(Good.BACKSTAGE_PASS)
-                    .withQuality(30)
-                    .beenStockedFor(10)
                     .expireIn(30)
             Assertions.assertThat(stock.quality).isEqualTo(20)
 
-            stock = stock.of(Good.BACKSTAGE_PASS)
-                    .withQuality(30)
+            stock = mockStock.of(Good.BACKSTAGE_PASS)
+                    .withQuality(20)
+                    .beenStockedFor(10)
+                    .expireIn(30)
+            Assertions.assertThat(stock.quality).isEqualTo(30)
+
+            stock = mockStock.of(Good.BACKSTAGE_PASS)
+                    .withQuality(20)
                     .beenStockedFor(20)
                     .expireIn(30)
-            Assertions.assertThat(stock.quality).isEqualTo(10)
+            Assertions.assertThat(stock.quality).isEqualTo(40)
         }
     }
 }
