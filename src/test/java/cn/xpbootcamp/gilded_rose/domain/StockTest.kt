@@ -72,11 +72,17 @@ internal class StockTest {
             }
 
             @Test
-            fun `should return current quality eqs to the stock in quality - 1 * days passed`() {
-                val stockFromYesterday = stockFrom(2)
+            fun `should return current quality eqs to the stock in quality - 1 * days after expire`() {
+                val stockFromYesterday = stockFrom(12).copy(
+                        sellIn = 10,
+                        quality = 30
+                )
                 assertThat(stockFromYesterday.currentQuality).isEqualTo(stockFromYesterday.quality - 2)
 
-                val stockFrom10DaysAgo = stockFrom(10)
+                val stockFrom10DaysAgo = stockFrom(20).copy(
+                        sellIn = 10,
+                        quality = 30
+                )
                 assertThat(stockFrom10DaysAgo.currentQuality).isEqualTo(stockFrom10DaysAgo.quality - 10)
             }
         }
